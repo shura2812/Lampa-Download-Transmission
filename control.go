@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net"
 	"os"
 	"strings"
@@ -103,13 +104,14 @@ func controlClient(cmd string) int {
 	defer conn.Close()
 	conn.SetDeadline(time.Now().Add(5 * time.Second))
 	fmt.Fprintf(conn, "%s\n", cmd)
-	reply, _ := bufio.NewReader(conn).ReadString('\n')
-	fmt.Print(reply)
-	if !strings.HasPrefix(strings.TrimSpace(reply), "ok") {
-		// status/code return non-"ok" payloads; treat unknown/error as failure.
-		if strings.HasPrefix(reply, "error:") || reply == "" {
-			return 1
-		}
-	}
+	//	reply, _ := bufio.NewReader(conn).ReadString('\n')
+	reply, _ := io.ReadAll(conn)
+	fmt.Print(string(reply))
+	// if !strings.HasPrefix(strings.TrimSpace(string(reply)), "ok") {
+	// 	// status/code return non-"ok" payloads; treat unknown/error as failure.
+	// 	if strings.HasPrefix(string(reply), "error:") || string(reply) == "" {
+	// 		return 1
+	// 	}
+	// }
 	return 0
 }
