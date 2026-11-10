@@ -12,5 +12,5 @@
 После запуска агента как сервиса по необходимости запускаем:\
 **/opt/lampa-agent/agent -code**             # показывает код для подключения (спаривания) устройства (ПК, смартфон, ТВ). Это придется сделать хотя бы один раз.\
 **/opt/lampa-agent/agent -pair**             # запускает режим спаривания\
-**/opt/lampa-agent/agent -status**           # JSON snapshot - пока не работает\
-**/opt/lampa-agent/agent -quit**             # clean shutdown (Restart=on-failure won't restart on clean exit)\
+**/opt/lampa-agent/agent -status**           # выводит статус работы агента\
+**/opt/lampa-agent/agent -quit**             # clean shutdown (Restart=on-failure won't restart on clean exit)
